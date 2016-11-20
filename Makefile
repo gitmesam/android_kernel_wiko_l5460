@@ -1,7 +1,7 @@
 VERSION = 3
 PATCHLEVEL = 18
 SUBLEVEL = 19
-EXTRAVERSION = ' Fever+'
+EXTRAVERSION = _Fever
 NAME = Shuffling Zombie Juror
 
 # *DOCUMENTATION*
