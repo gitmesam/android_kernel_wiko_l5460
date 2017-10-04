@@ -717,6 +717,7 @@ static struct mt_cpu_freq_info opp_tbl_e1_1[] = {
 	OP(CPU_DVFS_FREQ6, 105000),
 	OP(CPU_DVFS_FREQ7, 100000),
 	OP(CPU_DVFS_FREQ8, 95000),
+	OP(CPU_DVFS_FREQ8_1, 90500),
 };
 
 static struct opp_tbl_info opp_tbls[] = {
