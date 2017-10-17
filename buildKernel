@@ -1,5 +1,4 @@
 #!/bin/bash
-export PATH=../android/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/:$PATH
 make mrproper
 export ARCH=arm64
 make O=out TARGET_ARCH=arm64 l5460_defconfig
