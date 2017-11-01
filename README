@@ -1,4 +1,22 @@
-        Linux kernel release 3.x <http://kernel.org/>
+# android_kernel_wiko_l5460
+Wiko Fever 4G custom kernel
+
+If you have any suggestions or problems you can open an issue for it.  
+If you would like to contribute you can submit a pull request.
+
+
+Instructions for building:
+
+make mrproper
+export ARCH=arm64
+make O=out TARGET_ARCH=arm64 l5460_defconfig
+make O=out TARGET_ARCH=arm64 menuconfig
+make O=out TARGET_ARCH=arm64 -j8
+
+
+
+
+Linux kernel release 3.x <http://kernel.org/>
 
 These are the release notes for Linux version 3.  Read them carefully,
 as they tell you what this is all about, explain how to install the
