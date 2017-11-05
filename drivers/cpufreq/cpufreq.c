@@ -2570,3 +2570,26 @@ static int __init cpufreq_core_init(void)
 	return 0;
 }
 core_initcall(cpufreq_core_init);
+
+
+//Extra stuff
+int __cpufreq_driver_getavg(struct cpufreq_policy *policy, unsigned int cpu)
+{
+	int ret = 0;
+
+	if (cpufreq_disabled())
+		return ret;
+
+	if (!cpufreq_driver->getavg)
+		return 0;
+
+	policy = cpufreq_cpu_get(policy->cpu);
+	if (!policy)
+		return -EINVAL;
+
+	ret = cpufreq_driver->getavg(policy, cpu);
+
+	cpufreq_cpu_put(policy);
+	return ret;
+}
+EXPORT_SYMBOL_GPL(__cpufreq_driver_getavg);

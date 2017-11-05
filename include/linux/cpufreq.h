@@ -217,7 +217,6 @@ __ATTR(_name, 0444, show_##_name, NULL)
 static struct global_attr _name =		\
 __ATTR(_name, 0644, show_##_name, store_##_name)
 
-
 struct cpufreq_driver {
 	char			name[CPUFREQ_NAME_LEN];
 	u8			flags;
@@ -275,6 +274,8 @@ struct cpufreq_driver {
 	bool                    boost_supported;
 	bool                    boost_enabled;
 	int     (*set_boost)    (int state);
+    
+    unsigned int (*getavg)	(struct cpufreq_policy *policy,unsigned int cpu);
 };
 
 /* flags */
@@ -489,9 +490,15 @@ extern struct cpufreq_governor cpufreq_gov_interactive;
 #elif defined(CONFIG_CPU_FREQ_DEFAULT_GOV_INTERACTIVEPLUS)
 extern struct cpufreq_governor cpufreq_gov_interactiveplus;
 #define CPUFREQ_DEFAULT_GOVERNOR	(&cpufreq_gov_interactiveplus)
-#elif defined(CONFIG_CPU_FREQ_DEFAULT_GOV_HOTPLUGX)
-extern struct cpufreq_governor cpufreq_gov_hotplugx;
-#define CPUFREQ_DEFAULT_GOVERNOR	(&cpufreq_gov_hotplugx)
+
+#elif defined(CONFIG_CPU_FREQ_DEFAULT_GOV_PEGASUSQ)
+extern struct cpufreq_governor cpufreq_gov_pegasusq;
+#define CPUFREQ_DEFAULT_GOVERNOR	(&cpufreq_gov_pegasusq)
+
+#elif defined(CONFIG_CPU_FREQ_DEFAULT_GOV_WHEATLEY)
+extern struct cpufreq_governor cpufreq_gov_wheatley;
+#define CPUFREQ_DEFAULT_GOVERNOR (&cpufreq_gov_wheatley)
+
 #endif
 
 /*********************************************************************
@@ -614,5 +621,8 @@ int cpufreq_generic_init(struct cpufreq_policy *policy,
  *********************************************************************/
 
 void acct_update_power(struct task_struct *p, cputime_t cputime);
+
+//Extra stuff
+extern int __cpufreq_driver_getavg(struct cpufreq_policy *policy,unsigned int cpu);
 
 #endif /* _LINUX_CPUFREQ_H */

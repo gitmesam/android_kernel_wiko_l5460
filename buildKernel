@@ -1,6 +1,0 @@
-#!/bin/bash
-make mrproper
-export ARCH=arm64
-make O=out TARGET_ARCH=arm64 l5460_defconfig
-make O=out TARGET_ARCH=arm64 menuconfig
-make O=out TARGET_ARCH=arm64 -j30

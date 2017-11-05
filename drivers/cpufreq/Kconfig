@@ -125,15 +125,20 @@ config CPU_FREQ_DEFAULT_GOV_INTERACTIVEPLUS
           loading your cpufreq low-level hardware driver, using the
           'adaptive' governor for latency-sensitive workloads. If unsure
           have a look at the help section of the driver. Fallback governor
-	  will be the performance governor.
+          will be the performance governor.
 	  
-config CPU_FREQ_DEFAULT_GOV_HOTPLUGX
-        bool "hotplugx"
-        select CPU_FREQ_GOV_HOTPLUGX
-        select CPU_FREQ_GOV_INTERACTIVEPLUS
+config CPU_FREQ_DEFAULT_GOV_PEGASUSQ
+        bool "pegasusq"
+        select CPU_FREQ_GOV_PEGASUSQ
         help
-          Use the CPUFreq governor 'hotplugx' as default.
-	  Fallback governor will be the interactive plus governor.
+          Use the CPUFreq governor 'pegasusq' as default
+
+config CPU_FREQ_DEFAULT_GOV_WHEATLEY
+	bool "wheatley"
+	select CPU_FREQ_GOV_WHEATLEY
+	select CPU_FREQ_GOV_PERFORMANCE
+	help
+Use the CPUFreq governor 'wheatley' as default.
 
 endchoice
 
@@ -210,29 +215,26 @@ config CPU_FREQ_GOV_INTERACTIVE
 	  If in doubt, say N.
 
 config CPU_FREQ_GOV_INTERACTIVEPLUS
-        tristate "'interactiveplus' cpufreq policy governor"
+    tristate "'interactiveplus' cpufreq policy governor"
 	select CPU_FREQ_TABLE
 	select CPU_FREQ_GOV_COMMON
-        help
-          'interactiveplus' - This driver adds a dynamic cpufreq policy governor
-          designed for latency-sensitive workloads.
+    help
+      'interactiveplus' - This driver adds a dynamic cpufreq policy governor
+      designed for latency-sensitive workloads.
 
-          This governor attempts to reduce the latency of clock
-          increases so that the system is more responsive to
-          interactive workloads.
-
-          To compile this driver as a module, choose M here: the
-          module will be called cpufreq_adapative.
-
-          For details, take a look at linux/Documentation/cpu-freq.
-	  If in doubt, say N.
+      This governor attempts to reduce the latency of clock
+      increases so that the system is more responsive to
+      interactive workloads.
 	
-config CPU_FREQ_GOV_HOTPLUGX
-        tristate "'hotplugx' cpufreq policy governor"
-	select CPU_FREQ_TABLE
-	select CPU_FREQ_GOV_COMMON
-        help
-          'hotplugx' - Multi-core hotplug with reduced power usage when screen is off
+config CPU_FREQ_GOV_PEGASUSQ
+	tristate "'pegasusq' cpufreq policy governor"
+
+config CPU_FREQ_GOV_WHEATLEY
+	tristate "'wheatley' cpufreq governor"
+	depends on CPU_FREQ
+	help
+          'cpufreq_wheatley' - A dynamic cpufreq governor for 
+          Low Latency Frequency Transition capable processors
 	  
 config CPU_FREQ_GOV_CONSERVATIVE
 	tristate "'conservative' cpufreq governor"
