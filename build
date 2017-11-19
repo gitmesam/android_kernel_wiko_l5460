@@ -1,0 +1,31 @@
+#!/bin/bash
+export CROSS_COMPILE=~/Desktop/Android/toolchains/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+export ARCH=arm64
+
+echo Would you like to clean the config?
+read -p '(Y/N)' cleanConfig
+
+echo Would you like to clean output?
+read -p '(Y/N)' cleanOutput
+
+
+echo Would you like to edit config?
+read -p '(Y/N)' editConfig
+
+
+if [[ "$cleanConfig" = "y" ]] || [[ "$cleanConfig" = "Y" ]]; then
+    if [[ "$cleanOutput" = "y" ]] || [[ "$cleanOutput" = "Y" ]]; then
+        make mrproper
+    else
+        make clean
+    fi
+fi
+
+make O=out TARGET_ARCH=arm64 l5460_defconfig
+
+if [[ "$editConfig" = "y" ]] || [[ "$editConfig" = "Y" ]]
+    then
+        make O=out TARGET_ARCH=arm64 menuconfig
+fi
+
+make O=out TARGET_ARCH=arm64 -j8
